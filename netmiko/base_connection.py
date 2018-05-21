@@ -443,18 +443,16 @@ class BaseConnection(object):
         channel_data = ""
         i = 0
         while i <= max_loops:
-            time.sleep(loop_delay * delay_factor)
+            # time.sleep(loop_delay * delay_factor)
+            time.sleep(.2)
             new_data = self.read_channel()
             if new_data:
                 channel_data += new_data
             else:
                 # Safeguard to make sure really done
-                time.sleep(final_delay * delay_factor)
+                time.sleep(.2)
                 new_data = self.read_channel()
-                if not new_data:
-                    break
-                else:
-                    channel_data += new_data
+                channel_data += new_data
             i += 1
         return channel_data
 

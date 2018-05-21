@@ -178,3 +178,50 @@ If you have questions or would like to discuss Netmiko, a Netmiko channel exists
 Kirk Byers  
 Python for Network Engineers  
 https://pynet.twb-tech.com  
+
+# For CloudCube SDNMS
+必須先針對 FortiOS 進行以下動作後, 才可以使用SDNMS:
+關閉VM 的Paging
+```
+config system console
+set output more
+end
+```
+
+開啟 FortiVM VDOM
+```
+config system global
+set vdom-admin enable
+end
+```
+
+配置 網卡IP 與 MTU 1400
+```
+config system interface
+edit "port1"
+set vdom "root"
+set ip 100.100.100.6 255.255.255.0
+set allowaccess ping https ssh http fgfm
+set type physical
+set role wan
+set snmp-index 1
+set mtu-override enable
+set mtu 1400
+next
+
+
+config system interface
+edit "port2"
+set vdom "root"
+set ip 11.11.11.254 255.255.255.0
+set allowaccess ping
+set type physical
+set role lan
+set snmp-index 2
+set mtu-override enable
+set mtu 1400
+next
+
+```
+--
+Tony Cheng  <tonycheng@cloudcube.com>
