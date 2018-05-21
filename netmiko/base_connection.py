@@ -453,6 +453,7 @@ class BaseConnection(object):
                 time.sleep(.2)
                 new_data = self.read_channel()
                 channel_data += new_data
+		break
             i += 1
         return channel_data
 
