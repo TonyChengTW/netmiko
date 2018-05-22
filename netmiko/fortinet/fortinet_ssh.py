@@ -53,6 +53,7 @@ class FortinetSSH(CiscoSSHConnection):
 
     def cleanup(self):
         """Re-enable paging globally."""
+        """
         if self.allow_disable_global:
             enable_paging_commands = ["config system console", "set output more", "end"]
             if self.vdoms:
@@ -60,6 +61,8 @@ class FortinetSSH(CiscoSSHConnection):
             # Should test output is valid
             for command in enable_paging_commands:
                 self.send_command_timing(command)
+        """
+        pass
 
     def config_mode(self, config_command=''):
         """No config mode for Fortinet devices."""
